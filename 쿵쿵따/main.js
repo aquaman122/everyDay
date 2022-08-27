@@ -1,5 +1,6 @@
 const number = parseInt(prompt('몇 명에서 참여 합니까?'));
 
+if (number) {
 const $order = document.querySelector('#order');
 const $word = document.querySelector('#word');
 const $input = document.querySelector('input');
@@ -17,9 +18,9 @@ function onClickBtn() {
     } else { // 다음사람이 마지막이 아닌경우
       $order.textContent = order + 1;
     }
-   } else { // 제시한 단어가 옳바르지 않을경우
-      alert('틀렸습니다.');
-    }
+  } else { // 제시한 단어가 옳바르지 않을경우
+        alert('틀렸습니다.');
+  }
   $input.value = '';
   $input.focus();
 }
@@ -30,3 +31,4 @@ function onInput(event) {
 
 $input.addEventListener('input', onInput);
 $button.addEventListener('click', onClickBtn);
+}
