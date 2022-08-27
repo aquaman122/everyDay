@@ -8,8 +8,7 @@ let word;
 let newWord;
 
 function onClickBtn() { // 입력 단어 클릭.
-  console.log(1);
-  if (!word || word[word.length -1] === newWord[0]) { //제시어가 비어있는가 
+  if (!word || word[word.length -1] === newWord[0]) { //제시어가 비어있고 옳바른경우
     word = newWord;
     $word.textContent = word;
     const order = Number($order.textContent);
@@ -18,7 +17,7 @@ function onClickBtn() { // 입력 단어 클릭.
     } else {
       $order.textContent = order + 1;
     }
-  } else { 
+  } else { // 옳바르지 않는 경우
       alert('올바른 단어가 아닙니다.')
   }
   $input.value = '';
