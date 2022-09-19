@@ -23,7 +23,7 @@
     const $table = document.createElement('table');
     const $result = document.createElement('div');
     const rows = [];
-    let turn = 'X';
+    let turn = 'O';
 
     const checkWinner = (target) => {
       let rowIndex = target.parentNode.rowIndex;
@@ -64,24 +64,45 @@
       return hasWinner;
     };
 
+    const checkWinnerAndDraw = (target) => {
+      const hasWinner = checkWinner(target);
+      // 승자가 있으면
+      if (hasWinner) {
+          $result.textContent = `${turn}님이 승리!`;
+          $table.removeEventListener('click', callback);
+          return;
+        }
+        // 승자가 없으면
+        const draw = rows.flat().every((cell) => cell.textContent);
+        if(draw) {
+          $result.textContent = `무승부`;
+          return;
+        }
+        turn = turn === 'X' ? 'O' : 'X';
+    }
+
+    let clickable = true;
     const callback = (eve) => {
+      if (!clickable) {
+        return;
+      }
       if(eve.target.textContent !== '') { //칸이 이미 채워져 있는가 ?
         return;
       }
+      // 빈칸이면
       eve.target.textContent = turn;
       // 승부 판단하기
-      if(checkWinner(eve.target)) {
-        $result.textContent = `${turn}님이 승리!`;
-        $table.removeEventListener('click', callback);
-        return;
+      checkWinnerAndDraw(eve.target);
+      if(turn === 'X') {
+        const emptyCells = rows.flat().filter((v) => !v.textContent);
+        const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        clickable = false;
+        setTimeout(() => {
+          randomCell.textContent = 'X';
+          checkWinnerAndDraw(randomCell);
+          clickable = true;
+        }, 1000);
       }
-      // 무승부 검사
-      const draw = rows.flat().every((cell) => cell.textContent);
-      if (draw) {
-        $result.textContent = `무승부`;
-        return;
-      }
-      turn = turn === 'X' ? 'O' : 'X';
     };
     for (let i =1; i <= 3; i++) {
       const $tr = document.createElement('tr');
