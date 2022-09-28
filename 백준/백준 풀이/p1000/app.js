@@ -2,15 +2,24 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
-let arr = input;
+let num = input;
 
-solution(arr);
+solution(num);
 
-function solution(arr) {
-    // write here
-    let sum = 0;
-    for(let i =0; i < arr.length; i++) {
-        sum += arr[i];
-        console.log(sum);
+function solution(num) { 
+  let answer = 0;
+  
+  while (num != 1) {
+    if (num % 2 === 0) {
+      num /= 2;
+    } else {
+      num = (num * 3) + 1;
     }
+    answer += 1;
+  }
+  if (answer >= 500) {
+    return -1;
+  } else {
+    return answer;
+  }
 }
