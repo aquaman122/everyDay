@@ -2,24 +2,12 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
-let num = input;
+let array = +input;
+solution(array);
 
-solution(num);
-
-function solution(num) { 
-  let answer = 0;
-  
-  while (num != 1) {
-    if (num % 2 === 0) {
-      num /= 2;
-    } else {
-      num = (num * 3) + 1;
-    }
-    answer += 1;
-  }
-  if (answer >= 500) {
-    return -1;
-  } else {
-    return answer;
-  }
+function solution(array) { 
+    var answer = 0;
+    let arr = [];
+    console.log(arr);
+    answer = arr[Math.ceil(arr.length - 1) % 2];
 }

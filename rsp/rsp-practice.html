@@ -20,12 +20,13 @@
     <button id="paper" class="btn">보</button>
   </div>
   <div id="score">0</div>
+
   <script>
     const $computer = document.querySelector('#computer');
-    const $score = document.querySelector('#score');
     const $scissors = document.querySelector('#scissors');
     const $rock = document.querySelector('#rock');
     const $paper = document.querySelector('#paper');
+    const $score = document.querySelector('#score');
     const IMG_URL = './rsp.png';
     $computer.style.background = `url(${IMG_URL}) -464px 0`;
     $computer.style.backgroundSize = 'auto 200px';
@@ -33,7 +34,7 @@
     const rspX = {
       'scissors' : '0',
       'rock' : '-220px',
-      'paper': '-440px',
+      'paper' : '-440px',
     }
 
     let computerChoice = 'scissors';
@@ -42,27 +43,27 @@
         computerChoice = 'rock';
       } else if (computerChoice === 'rock') {
         computerChoice = 'paper';
-      } else if (computerChoice === 'paper'){
+      } else if (computerChoice === 'paper') {
         computerChoice = 'scissors';
       }
       $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
       $computer.style.backgroundSize = 'auto 200px';
-    };
+    }
 
-    let intervalId = setInterval(changeComputerHand, 50);
-    
+    let intervalId = setInterval(changeComputerHand,50);
+
     const scoreTable = {
       rock: 0,
       scissors: 1,
       paper: -1,
-    };
+    }
     let score = 0;
-    let clickable = true
-    const clickButton = () => {
-      if (clickable) {
+    let clickable = true;
+    const onClickButton = () => {
+      if(clickable) {
         clearInterval(intervalId);
         clickable = false;
-        // 점수 계산 및 화면 표시
+
         const myChoice = event.target.textContent === '바위'
           ? 'rock'
           : event.target.textContent === '가위'
@@ -73,13 +74,13 @@
         const diff = myScore - computerScore;
         let message = '';
         if ([2, -1].includes(diff)) {
-          score += 1;
-          message = '승리';
+          score +=1 ;
+          message = 'Win';
         } else if ([-2, 1].includes(diff)) {
           score -= 1;
-          message = '패배';
+          message = 'Lose';
         } else {
-          message = '무승부';   
+          message = 'equal'
         }
         $score.textContent = `${message} 총: ${score}점`;
 
@@ -90,9 +91,9 @@
       }
     };
 
-    $scissors.addEventListener('click', clickButton);
-    $rock.addEventListener('click', clickButton);
-    $paper.addEventListener('click', clickButton);
+    $rock.addEventListener('click',onClickButton);
+    $scissors.addEventListener('click',onClickButton);
+    $paper.addEventListener('click',onClickButton);
   </script>
 </body>
 </html>
