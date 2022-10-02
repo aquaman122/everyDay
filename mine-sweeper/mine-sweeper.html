@@ -72,7 +72,8 @@
           rowData.push(CODE.NORMAL);
         }
       }
-
+      // ex) 2 칸 12칸 에 폭탄 5개라고 하면  53번째 를 뽑고싶을때 53 / 2 = 16번째 줄
+      // 53 / 2 = 26번째 칸  
       for (let k = 0; k < shuffle.length; k++) {
         const ver = Math.floor(shuffle[k] / cell); // 7번째 줄
         const hor = shuffle[k] % cell; // 1번째 칸
@@ -208,7 +209,7 @@
           const $td = document.createElement('td');
           if (cell === CODE.MINE) {
             if (dev) {
-              $td.textContent = 'X'; // 개발 편의를 위해
+              // $td.textContent = 'X'; // 개발 편의를 위해
             }
           }
           $tr.append($td);
