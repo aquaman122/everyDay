@@ -4,6 +4,7 @@
   // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
   "version": "0.2.0",
   "configurations": [
+
   {
     "name": "Attach to Chrome",
     "port": 9222,
@@ -22,7 +23,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "Open index.html",
-      "file": "react-webgame/2.끝말잇기/index.html"
+      "file": "react-webgame/3.NumberBaseball/index.html"
     }
   ]
 }
