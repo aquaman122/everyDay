@@ -5,6 +5,8 @@
   "version": "0.2.0",
   "configurations": [
 
+  
+
   {
     "name": "Attach to Chrome",
     "port": 9222,
@@ -23,7 +25,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "Open index.html",
-      "file": "react-webgame/3.NumberBaseball/index.html"
+      "file": "react-webgame/4.반응속도테스트/index.html"
     }
   ]
 }
