@@ -1,172 +1,51 @@
 // import logo from './logo.svg';
-import './App.css';
-import {useState} from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
+// import Hello from './Hello';
+// import Wrapper from './Wrapper';
+// import Counter from './Counter';
+// import InputSample from './inputSample';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
+import './App.css'
 
-function Header(props) {
-  return (<header>
-    <h2><a href='/' onClick={(event) => {
-      event.preventDefault();
-      props.onChangeMode();
-    }}>{props.title}</a></h2>
-  </header>
-  );
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는중...');
+  return users.filter(user => user.active).length;
 }
-
-function Nav(props) {
-  const lis = []
-  for (let i =0; i<props.topics.length; i++) {
-    const t = props.topics[i];
-    lis.push(<li key={t.id}><a id={t.id} href={'/read/' + t.id} onClick={(event) => {
-      event.preventDefault();
-      props.onChangeMode(Number(event.target.id));
-    }}>{t.title}</a></li>);
-  }
-  return (<nav>
-    <ol>
-     {lis}
-    </ol>
-  </nav>
-  );
-}
-
-function Article(props) {
-  return (
-    <article>
-      <h2>{props.title}</h2>
-      <h3>{props.body}</h3>
-    </article>
-  );
-}
-
-function Create(props) {
-  return (<article>
-      <h2>Create</h2>
-      <form onSubmit={event => {
-        event.preventDefault();
-        const title = event.target.title.value;
-        let body = event.target.body.value;
-        props.onCreate(title, body);
-      }}>
-        <p><input type="text" name="title" placeholder="title"></input></p>
-        <p><textarea name="body" placeholder='body'></textarea></p>
-        <p><input type='submit' value='Create'></input></p>
-      </form>
-    </article>
-  );
-}
-
-function Update(props) {
-  const [title, setTitle] = useState(props.title);
-  const [body, setBody] = useState(props.body);
-  return (<article>
-    <h2>Update</h2>
-    <form onSubmit={event => {
-      event.preventDefault();
-      const title = event.target.title.value;
-      const body = event.target.body.value;
-      props.onUpdate(title, body);
-    }}>
-      <p><input type="text" name='title' placeholder='title' value={title} onChange={(event) => {
-        setTitle(event.target.value);
-      }}></input></p>
-      <p><textarea name="body" placeholder='body' value={body} onChange={event => {
-        setBody(event.target.value);
-      }}></textarea></p>
-      <p><input type='submit' value='Update'></input></p>
-    </form>
-  </article>
-);
+const initialState = {
+  inputs: {
+    username: '',
+    email: ''
+  },
+  users: [
+    {
+      id: 1,
+      username: 'velopert',
+      email: 'public.velopert@gmail.com',
+      active: true
+    },
+    {
+      id: 2,
+      username: 'tester',
+      email: 'tester@example.com',
+      active: false
+    },
+    {
+      id: 3,
+      username: 'liz',
+      email: 'liz@example.com',
+      active: false
+    }
+  ]
 }
 
 function App() {
-  let [mode,setMode] = useState('WELCOME');
-  let [id, setId] = useState();
-  let [nextId, setNextId] = useState(4);
-  const [topics, setTopics] = useState([
-    {id:1, title:"html", body:"html is ..."},
-    {id:2, title:"css", body:"css is ..."},
-    {id:3, title:"javascript", body:"javascript is ..."},
-  ]);
-  let content = null;
-  let contextControl = null;
-  let deleted = null;
-  if (mode === 'WELCOME') {
-    content = <Article title="Hello, WEB" body="web is ..."></Article>
-  } else if (mode === 'READ') {
-    let title, body = null;
-    for (let i=0; i<topics.length; i++) {
-      if(topics[i].id === id){
-        title = topics[i].title;
-        body = topics[i].body;
-      }
-    }
-    content = <Article title={title} body={body}></Article>
-    contextControl = <>
-      <li><a href='/update' value='Delete' onClick={event => {
-      event.preventDefault();
-      setMode('UPDATE');
-    }}>Update</a>
-    </li>
-    <li><input type="button" value='Delete' onClick={() => {
-      const newTopics = [];
-      for (let i =0; i<topics.length; i++) {
-        if(topics[i].id !== id) {
-          newTopics.push(topics[i]);
-        }
-      }
-      setTopics(newTopics);
-      setMode('WELCOME');
-    }}></input></li>
+  return (
+    <>
+      <CreateUser />
+      <UserList users={[]} />
+      <div>활성사용자 수 : 0</div>
     </>
-  } else if (mode === 'CREATE') {
-    content = <Create onCreate={(title, body) => {
-      const newTopic = {id:nextId, title:title, body:body}
-      const newTopics = [...topics];
-      newTopics.push(newTopic);
-      setTopics(newTopics);
-      setMode('READ');
-      setId(nextId);
-      setNextId(nextId + 1);
-    }}></Create>
-  } else if (mode === 'UPDATE') {
-    let title, body = null;
-    for (let i =0; i<topics.length; i++) {
-      if(topics[i].id === id) {
-        title = topics[i].title;
-        body = topics[i].body;
-      }
-    }
-    content = <Update title={title} body={body} onUpdate={(title, body) => {
-      const updatedTopic = {id:id, title:title, body: body};
-      const newTopics = [...topics];
-      for (let i= 0; i<newTopics.length; i++) {
-        if (newTopics[i].id === id) {
-          newTopics[i] = updatedTopic;
-          break;
-        }
-      }
-      setTopics(newTopics);
-      setMode('READ');
-    }}></Update>
-  }
-  
-  return (<div>
-    <Header title="WEB" onChangeMode={() => {
-      setMode('WELCOME');
-    }}></Header>
-    <Nav topics={topics} onChangeMode={(_id) => {
-      setMode('READ');
-      setId(_id);
-    }}></Nav>
-    {content}
-    <ul>
-      <li><a href='/create' onClick={(event) => {
-        event.preventDefault();
-        setMode('CREATE');
-      }}>Create</a></li>
-      {contextControl}
-    </ul>
-    </div>
   );
 }
 
