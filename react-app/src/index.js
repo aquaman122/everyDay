@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Counter from './Counter';
 
-const root = ReactDOM.createRoot(<Counter />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    <Counter />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
