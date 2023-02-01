@@ -12,6 +12,47 @@
   <div>제시어: <span id="word"></span></div>
   <input type="text">
   <button>입력</button>
-  <script src="main.js"></script>
+  <script>
+    const people = parseInt(prompt('참가자가 몇명인가요?'), 10);
+
+    const $order = document.querySelector('#order');
+    const $word = document.querySelector('#word');
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    let word;
+    let newWord;
+    let words = [];
+
+    $input.addEventListener('input', () => {
+      newWord = event.target.value;
+    });
+
+    $button.addEventListener('click', (event) => {
+      if (!word || word[word.length - 1] === newWord[0] && newWord.length === 3) {
+        word = newWord;
+        $word.textContent = word;
+
+        const order = parseInt($order.textContent);
+          if (order < people) {
+            $order.textContent++;
+          } else {
+            $order.textContent = 1;
+          }
+
+        $input.value = '';
+        $input.focus();
+        if (!words.includes(newWord)) {
+          words.push(word);
+          console.log(words);
+        } else {
+          alert('틀렸습니다');
+        }
+      } else {
+          alert('틀렸습니다.');
+          $input.value = '';
+          $input.focus();
+        }
+      });
+  </script>
 </body>
 </html>
