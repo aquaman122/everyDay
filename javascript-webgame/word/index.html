@@ -28,6 +28,8 @@
     });
 
     $button.addEventListener('click', (event) => {
+
+      if (people) {
       if (!word || word[word.length - 1] === newWord[0] && newWord.length === 3) {
         word = newWord;
         $word.textContent = word;
@@ -43,15 +45,22 @@
         $input.focus();
         if (!words.includes(newWord)) {
           words.push(word);
-          console.log(words);
         } else {
           alert('틀렸습니다');
         }
       } else {
           alert('틀렸습니다.');
+          word = '';
+          newWord = '';
+          words = '';
+          $order.textContent = 1;
+          $word.textContent = '';
           $input.value = '';
           $input.focus();
         }
+      } else {
+
+      }
       });
   </script>
 </body>
