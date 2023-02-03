@@ -7,11 +7,80 @@
   <title>숫자야구</title>
 </head>
 <body>
+	<h1>숫자야구 게임</h1>
+	<p>4자리 중복되지 않는 숫자를 입력해주세요.</p>
 	<form id="form">
-		<input type="text" id="input">
+		<input required type="text" id="input">
 		<button>확인</button>
 	</form>
 	<div id="logs"></div>
-	<script src="main.js"></script>
+	<script>
+		const $form = document.querySelector('#form');
+		const $logs = document.querySelector('#logs');
+		const $input = document.querySelector('#input');
+
+		const numbers = Array(10).fill().map((item, idx) => idx);
+		
+		let answer = [];
+		for (let i=0; i<4; i++) {
+			const index = Math.floor(Math.random() * numbers.length);
+			answer.push(numbers[index]);
+			numbers.splice(index, 1);
+		}
+
+		const tries = [];
+		let getNumbers = [];
+		const checkValue = (input) => {
+			if (input.length !== 4) {
+				return alert('4자리 숫자로 부탁할게');
+			}
+			if (new Set(input).size !== 4) {
+				return alert('중복 되지않는 숫자로 해줘');
+			}
+			if (tries.includes(input)) {
+				return alert('이미 했던 숫자야');
+			}
+			return true;
+		}
+
+		const onSubmitNumber = (input) => {
+			
+		}
+		
+		$form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			let value = $input.value;
+			$input.value = '';
+			
+			if (!checkValue(value)) { // 입력값 검증;
+				return;
+			}
+			if (answer.join('') === value) {
+				$logs.textContent = '홈런';
+				return;
+			}
+			if (tries.length > 9) {
+				const message = document.createTextNode(`!패배 정답은 ${answer.join('')}입니다`);
+				$logs.appendChild(message);
+				return;
+			}
+			let strike = 0;
+			let ball = 0;
+
+			for (let i =0; i < answer.length; i++) {
+				const index = value.indexOf(answer[i]);
+				if (index > -1) {
+					if (index === i) {
+						strike++;
+					} else {
+						ball ++;
+					}
+				}
+			}
+			$logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+			tries.push(value);
+		});
+		
+	</script>
 </body>
 </html>
