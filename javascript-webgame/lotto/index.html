@@ -37,7 +37,7 @@
 		const $number = document.querySelector('#number');
 		const $collect = document.querySelector('#collect');
 		const $rank = document.querySelector('#rank');
-		const collect = 0;
+		let collect = 0;
 		
 		const numbers = Array(45).fill().map((item, idx) => idx + 1);
 		let lottoNumbers = [];
@@ -60,6 +60,7 @@
 		// const bonus = lottoNumbers[6];
 		
 		let getNumbers = [];
+		console.log(lottoNumbers);
 
 		const appearNumbers = (input) => {
 			for (let i=0; i< 6; i++) {
@@ -78,20 +79,36 @@
 			}, 8000)
 		}
 
+		const validInputNumber = (input) => {
+			if (new Set(input).size !== 6) {
+				alert('같은 숫자를 입력했습니다');
+				return;
+			}
+		}
+
+		const setLottoWinNum = () => {
+			getNumbers.map(Number);
+			for (let i=0; i < 7; i++) {
+				for (let j =0; j < 6; j++) {
+					if(lottoNumbers[i] === getNumbers[j]) {
+						collect++;
+					}
+				}
+			}
+		}
+
 		$form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			getNumbers.push($input.value);
 			$input.value = '';
+			
 			if (getNumbers.length > 5) {
 				appearNumbers();
+				validInputNumber(getNumbers);
+				$number.append(`${getNumbers}`);
+				$collect.append(`${collect} 개 맞았습니다`);
 				return;
 			}
-			
-			lottoNumbers.forEach((ele, idx) => {
-				const index = getNumbers.indexOf(ele);
-				
-			})
-
 		})
 	</script>
 </body>
