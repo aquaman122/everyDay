@@ -7,7 +7,7 @@
   <title>rsp</title>
   <style>
     #computer {
-      width: 142px;
+      width: 156px;
       height: 200px;
     }
   </style>
@@ -27,22 +27,23 @@
     const $rock = document.querySelector('#rock');
     const $paper = document.querySelector('#paper');
     const IMG_URL = './rsp.png';
-    $computer.style.background = `url(${IMG_URL}) -464px 0`;
+    let score = 0;
+    $computer.style.background = `url(${IMG_URL}) -440px 0`;
     $computer.style.backgroundSize = 'auto 200px';
 
     const rspX = {
-      'scissors' : '0',
-      'rock' : '-220px',
-      'paper': '-440px',
-    }
+      scissors: '0',
+      rock: '-220px',
+      paper: '-440px',
+    };
 
     let computerChoice = 'scissors';
     const changeComputerHand = () => {
       if (computerChoice === 'scissors') {
         computerChoice = 'rock';
-      } else if (computerChoice === 'rock') {
+      } else if(computerChoice === 'rock') {
         computerChoice = 'paper';
-      } else {
+      } else if (computerChoice === 'paper') {
         computerChoice = 'scissors';
       }
       $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
@@ -50,57 +51,73 @@
     };
 
     let intervalId = setInterval(changeComputerHand, 50);
-    
-    const scoreTable = {
-      rock: 0,
-      scissors: 1,
-      paper: -1,
-    };
 
-    let myNum = 0;
-    let comNum = 0;
-    let score = 0;
-    let clickable = true
-    const clickButton = () => {
+    let clickable = true; // flag 변수
+
+    const onClickBtn = (event) => {
       if (clickable) {
         clearInterval(intervalId);
         clickable = false;
-        // 점수 계산 및 화면 표시
-        const myChoice = event.target.textContent === '바위'
-          ? 'rock'
-          : event.target.textContent === '가위'
-            ? 'scissors'
-            : 'paper';
-        const myScore = scoreTable[myChoice];
-        const computerScore = scoreTable[computerChoice];
-        const diff = myScore - computerScore;
-        let message = '';
-        if ([2, -1].includes(diff)) {
-          myNum += 1;
-          message = '승리';
-        } else if ([-2, 1].includes(diff)) {
-          comNum += 1
+
+        let myChioce = event.target.textContent;
+        let message;
+        if (myChioce === '가위') {
+        if (computerChoice === 'scissors') {
+          message = '무승부';
+        } else if (computerChoice === 'rock') {
+          score--;
           message = '패배';
         } else {
-          message = '무승부';   
+          score++;
+          message = '승리';
         }
-        if (myNum >= 3) {
-          $score.textContent = `나의 승리 ${myNum}:${comNum}`;
-        } else if (comNum >= 3) {
-          $score.textContent = `컴퓨터의 승리 ${myNum}:${comNum}`;
+      }
+      if (myChioce === '바위') {
+        if (computerChoice === 'scissors') {
+          score++;
+          message = '승리';
+        } else if (computerChoice === 'rock') {
+          message = '무승부';
         } else {
-          $score.textContent = `${message} ${myNum}:${comNum}`;
-          setTimeout(() => {
-            clickable = true;
-            intervalId = setInterval(changeComputerHand, 50);
-          }, 1000);
+          score--;
+          message = '패배';
         }
+      }
+      if (myChioce === '보') {
+        if (computerChoice === 'scissors') {
+          score--;
+          message = '패배';
+        } else if (computerChoice === 'rock') {
+          score++;
+          message = '승리';
+        } else {
+          message = '무승부';
+        }
+      }
+      $score.textContent = `${message} 총: ${score}점`;
+
+      if (score > 2) {
+        $score.textContent = `최종 승리`;
+        $scissors.removeEventListener('click', onClickBtn);
+        $rock.removeEventListener('click', onClickBtn);
+        $paper.removeEventListener('click', onClickBtn);
+      } else if (score < - 2) {
+        $score.textContent = `패배`;
+        $scissors.removeEventListener('click', onClickBtn);
+        $rock.removeEventListener('click', onClickBtn);
+        $paper.removeEventListener('click', onClickBtn);
+      }
+        setTimeout(() => {
+          clickable = true;
+          intervalId = setInterval(changeComputerHand, 50);
+        }, 1500);
       }
     };
 
-    $scissors.addEventListener('click', clickButton);
-    $rock.addEventListener('click', clickButton);
-    $paper.addEventListener('click', clickButton);
+
+    $scissors.addEventListener('click', onClickBtn);
+    $rock.addEventListener('click', onClickBtn);
+    $paper.addEventListener('click', onClickBtn);
   </script>
 </body>
 </html>
