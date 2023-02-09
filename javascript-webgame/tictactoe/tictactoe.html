@@ -19,15 +19,6 @@
   </style>
 </head>
 <body>
-  <!-- <table>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr> 
-
-  -->
-  </table>
   <script>
     const $table = document.createElement('table');
     const $result = document.createElement('div');
@@ -104,13 +95,25 @@
       turn = turn === 'X' ? 'O' : 'X';
     }
 
+    let clickable = true;
     const callback = (event) => {
+      if (!clickable) return;
       if (event.target.textContent) return;
         // alread have space;
         event.target.textContent = turn;
         checkWinAndDraw(event.target);
         // 무승부 검사
         // toggle turn;
+      if (turn === 'X') {
+        const emptyCells = data.flat().filter((ele) => !ele.textContent);
+        const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        clickable = false;
+        setTimeout(() => {
+          randomCell.textContent = 'X';
+          checkWinAndDraw(randomCell);
+          clickable = true;
+        }, 1000)
+      }
     }
 
     for (let i =0; i < 3; i++) {
