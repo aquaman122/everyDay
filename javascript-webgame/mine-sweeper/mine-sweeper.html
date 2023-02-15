@@ -38,9 +38,9 @@
     const $table = document.querySelector('#table');
     const $tbody = document.querySelector('tbody');
     const $result = document.querySelector('#result');
-    let row = 10; // 줄
-    let cell = 10; // 칸
-    let mine = 10; // 지뢰
+    let row; // 줄
+    let cell; // 칸
+    let mine;// 지뢰
     const CODE = {
       NORMAL: -1, // 닫힌칸
       QUESTION: -2,
@@ -51,13 +51,27 @@
       OPENED: 0, // 0 이상이면 모두 열린 칸
     }
     let data;
-    let startTime = new Date();
-    const interval = setInterval(() => {
-      const time = Math.floor((new Date() - startTime) / 1000);
-      $timer.textContent = `${time}초 `;
-    }, 1000);
-    let openCount = 0;
+    let openCount;
+    let startTime;
+    let interval;
     // 생성;
+
+    function onSubmit(event) {
+      event.preventDefault();
+      row = parseInt(event.target.row.value);
+      cell = parseInt(event.target.cell.value);
+      mine = parseInt(event.target.mine.value);
+      openCount = 0;
+      $tbody.innerHTML = '';
+      drawTable();
+      startTime = new Date();
+      interval = setInterval(() => {
+        const time = Math.floor((new Date() - startTime) / 1000);
+        $timer.textContent = `${time}초`;
+      }, 1000);
+    }
+
+    $form.addEventListener('submit', onSubmit);
 
     const plantMine = () => {
       const candidate = Array(row * cell).fill().map((arr, i) => {
@@ -172,11 +186,43 @@
       }, 0);
     }
 
+    let normalCellFound = false;
+    let searched;
+    let firstClick = true;
+    function transferMine(rI, cI) {
+      if (normalCellFound) return;
+      if (rI < 0 || rI >= row || cI < 0 || cI >= cell) return;
+      if (searched[rI][cI]) return; // 이미 찾은 칸이면 종료
+      if (isNormal(data[rI]?.[cI])) { // 빈칸인 경우
+        normalCellFound = true;
+        data[rI][cI] = CODE.MINE;
+      } else { // 지뢰 카닝ㄴ 경우 8방향 탐색
+        searched[rI][cI] = true;
+        transferMine(rI - 1, cI - 1);
+        transferMine(rI - 1, cI);
+        transferMine(rI - 1, cI + 1);
+        transferMine(rI, cI - 1);
+        transferMine(rI, cI + 1);
+        transferMine(rI + 1, cI - 1);
+        transferMine(rI + 1, cI);
+        transferMine(rI + 1, cI + 1);
+      }
+    }
+
     const onLeftClick = (event) => {
       const target = event.target;
       const rowIndex = target.parentNode.rowIndex;
       const cellIndex = target.cellIndex;
       const cellData = data[rowIndex][cellIndex];
+      if (firstClick) {
+        firstClick = false;
+        searched = Array(row).fill.map(() => []);
+        if (cellData === CODE.MINE) { // 첫 클릭이 지뢰면
+          transferMine(rowIndex, cellIndex);
+          data[rowIndex][cellIndex] = CODE.NORMAL;
+          cellData = CODE.NORMAL;
+        }
+      }
       if (cellData === CODE.NORMAL) { // 닫힌 칸이면  
         openAround(rowIndex, cellIndex);
       } else if (cellData === CODE.MINE) { // 지뢰 칸이면
@@ -195,7 +241,7 @@
         row.forEach((cell) => {
           const $td = document.createElement('td');
           if (cell === CODE.MINE) { // 폭탄
-            $td.textContent = 'X';
+            // $td.textContent = 'X';
           }
           $tr.appendChild($td);
         });
@@ -204,7 +250,6 @@
         $tbody.addEventListener('click', onLeftClick);
       })
     };
-    drawTable();
   </script>
 </body>
 </html>
