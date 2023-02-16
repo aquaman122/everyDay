@@ -9,18 +9,18 @@ solution(n, m)
 
 function solution(n, m) {
   // write here
-  let array = Array.from(Array(n), () => Array(m).fill(0));
+  const array = Array.from(Array(n), () => Array(m).fill(0));
 
   for (let i =0; i < n; i++) {
-    for (let j =0; j < m; j++) {
-        array[i][j] = input[i][j] + input[i + n][j];
+    for (let j = 0; j < m; j++) {
+      array[i][j] = input[i][j] + input[i + n][j];
     }
   }
-
+  
   let answer = '';
-  for (let i =0; i< n; i++) {
-    for (let j =0; j < m; j++) {
-        answer += array[i][j].toString() + ' ';
+  for (let i =0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      answer += array[i][j].toString() + ' ';
     }
     answer += '\n';
   }
