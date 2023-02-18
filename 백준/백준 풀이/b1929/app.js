@@ -1,0 +1,34 @@
+const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
+const input = require("fs").readFileSync(filePath).toString().trim().split(" ");
+
+const m = parseInt(input[0]);
+const n = parseInt(input[1]);
+let x = m;
+
+let prime = [];
+
+// 범위가 1부터일경우 소수 2를 추가해주기위함
+if (m < 2) prime.push(2);
+// m부터 n까지 확인
+while (x < n + 1) {
+  // x를 2~x-1까지의 숫자로 나눠보기 나눠떨어지면 break; 마지막까지 안나눠떨어지면 prime에 추가
+
+  // 제곱근이 있을 경우 판별
+  if (Math.sqrt(x) % 1 === 0) {
+    x++;
+    continue;
+  }
+
+  // 2부터 제곱근+1까지 하나씩 나눠보기
+  for (i = 2; i < Math.sqrt(x) + 1; i++) {
+    // x가 i로 나눠질 경우 판별
+    if (x % i == 0) {
+      break;
+    }
+    //i가 마지막까지 살아있을때 prime 배열에 x 추가 -> 더 좋은 조건문이 있을거같음.
+    if (i > Math.sqrt(x)) prime.push(x);
+  }
+  x++;
+}
+
+prime.map((e) => console.log(e));
