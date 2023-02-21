@@ -5,6 +5,8 @@ function App() {
   const [result, setResult] = useState('');
   const [value, setValue] = useState('');
   const inputRef = useRef(null);
+  let strike;
+  let ball;
 
   const array = Array(10).fill().map((v , i) => i);
   const shuffled = [];
@@ -37,6 +39,16 @@ function App() {
         return;
       }
     }
+    shuffled.forEach((ele, i) => {
+      const index = array.indexOf(ele);
+      if(index > -1) {
+        if(index === i) {
+          strike++;
+        } else {
+          ball++;
+        }
+      }
+    })
   }
 
   return (
