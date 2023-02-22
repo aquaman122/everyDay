@@ -49,6 +49,11 @@ body {
 #login-form input:nth-child(2) {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
+#login-form input:nth-child(3),
+#login-form input:nth-child(4) {
+  background-color: yellow;
+  cursor: pointer;
+}
 
 #login-form input::placeholder {
   color: rgba(0, 0, 0, 0.4);
