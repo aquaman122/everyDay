@@ -1,24 +1,44 @@
 import React from 'react';
 import './Product.css';
+import {useStateValue} from './StateProvider';
 
-function Product() {
+function Product( {id, title, image, price, rating} ) {
+  const [{basket}, dispatchEvent] = useStateValue();
+
+  const addToBasket = () => {
+    dispatchEvent({
+      type:'ADD_TO_BASKET',
+      item: {
+        id:id,
+        title:title,
+        image:image,
+        price:price,
+        rating:rating,
+      }
+    })
+  };
+
   return(
     <>
       <div className='product'>
         <div className='product_info'>
-          <p>제품1</p>
+          <p>{ title }</p>
           <p className='product_price'>
             <small>가격</small>
-            <strong>10,000</strong>
-            <small>₩</small>
+            <strong>{ price }</strong>
+            <small>원</small>
           </p>
 
           <div className='product_rating'>
-            <p>*</p>
+            {
+              Array(rating).fill().map(() => (
+                <p>★</p>
+              ))
+            }
           </div>
         </div>
-
-        <button>장바구니에 담기</button>
+        <img src={ image }  />
+        <button onClick={addToBasket}>장바구니에 담기</button>
       </div>
     </>
   )
