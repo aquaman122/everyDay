@@ -4,9 +4,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import {Link} from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import { auth } from './firebase';
 
 function Header() {
-  const [{basket}, dispatchEvent] = useStateValue();
+  const [{basket, user}, dispatchEvent] = useStateValue();
+
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+    }
+  }
 
   return (
     <>
@@ -25,8 +32,8 @@ function Header() {
         <div className='header_nav'>
           <div className='header_option'>
             <span className='header_optionLineOne'>안녕하세요</span>
-            <Link to='/login' className='homeLogin'>
-            <span className='header_optionLineTWo'>로그인하기</span>
+            <Link to={!user && './login'} className='homeLogin'>
+            <span onClick={handleAuthentication} className='header_optionLineTWo'>{user ? '로그아웃' : '로그인'}</span>
             </Link>
           </div>
           <div className='header_option'>

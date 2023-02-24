@@ -18,6 +18,7 @@ function solution(N, A, M, B) {
 
         if (list[mid] > target) {
             right = mid - 1;
+            console.log(right);
         } else {
             left = mid + 1;
         }
