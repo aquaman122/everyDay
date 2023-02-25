@@ -10,7 +10,7 @@ solution(n)
 function solution(n) {
     // write here
   const answer = [];
-  for (let i =0; i < (n / 4); i++) {
+  for (let i =0; i < n / 4; i++) {
     answer.push('long');
   }
   console.log(`${answer.join(' ')} int`);
