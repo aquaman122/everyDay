@@ -5,33 +5,38 @@ import CheckoutProduct from './CheckoutProduct';
 import { useStateValue } from './StateProvider';
 import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from './Reducer';
+import axios from './axios';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 function Payment() {
   const [{ basket, user }, dispatchEvent] = useStateValue();
   const navigate = useNavigate();
-  const [error, SetError] = useState(null);
-  const [disable, setDisable] = useState(true);
+
+  const stripe = useStripe();
+  const elements = useElements();
+  
   const [procssing, setProcssing] = useState('');
   const [succeed, setSucceed] = useState(false);
 
+  const [error, SetError] = useState(null);
+  const [disable, setDisable] = useState(true);
   const [clientSecret, setClientSecret] = useState(true);
 
-  const stripe = useStripe();
-  const elements = useElements(true);
 
   useEffect(() => {
     const getClientSecret = async () => {
-      const response = await axios ({
-        method: 'post',
-        url: `/payments/create?total=${getBasketTotal(basket) * 100}`
-      });
-      setClientSecret(response.data.clientSecret)
+        const response = await axios({
+            method: 'post',
+            url: "/payments/create?total=" + getBasketTotal(basket) * 100
+        });
+        setClientSecret(response.data.clientSecret)
     }
+
     getClientSecret();
   }, [basket])
+  console.log(clientSecret);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setProcssing(true);
 
@@ -50,7 +55,7 @@ function Payment() {
 
   const handleChange = (e) => {
     setDisable(e.empty);
-    SetError(e.error ? e.error.message: '');
+    SetError(e.error ? e.error.message : '');
   }
   return (
     <>
