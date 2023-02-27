@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Header from '../../header/Header';
-import Post from '../../post/Post';
+import Posts from '../../posts/Posts';
 import Sidebar from '../../sidebar/Sidebar';
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
     <>
     <Header />
       <div className='home'>
-        <Post />
+        <Posts />
         <Sidebar />
       </div>
     </>

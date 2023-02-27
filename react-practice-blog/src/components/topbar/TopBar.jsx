@@ -4,6 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from 'react-router-dom'
 
 function TopBar() {
   return (
@@ -16,9 +17,14 @@ function TopBar() {
           </div>
           <div className='topCenter'>
             <ul className='topList'>
-              <li className='topListItem'>HOME</li>
+              <Link className='topListLink' to='/'>
+                <li className='topListItem'>HOME</li>
+              </Link>
               <li className='topListItem'>ABOUT</li>
               <li className='topListItem'>CONTEXT</li>
+              <Link className='topListLink' to='/write'>
+                <li className='topListItem'>WRITE</li>
+              </Link>
               <li className='topListItem'>LOGOUT</li>
             </ul>
           </div>

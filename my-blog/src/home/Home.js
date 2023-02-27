@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import Script from './Script';
+import Script from '../script/Script';
 import SearchIcon from '@mui/icons-material/Search';
 
 function Home() {
