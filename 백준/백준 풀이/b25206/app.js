@@ -34,7 +34,7 @@ function solution(input) {
             break;
             case 'F': rankscore += 0.0, score -= Number(input[i][1]);
             break;
-            case 'P': pCount++, score -= Number(input[i][1]);
+            case 'P': pCount++;
             break;
             default:
             break;

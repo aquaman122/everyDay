@@ -8,10 +8,5 @@ solution(n);
 
 function solution(n) {
     // write here
-    const answer = [];
-    let star = '*';
-    for (let i = 1; i < n; i++) {
-        const empty = '';
-        
-    }
+    
 }
