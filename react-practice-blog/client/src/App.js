@@ -6,8 +6,12 @@ import Settings from './components/pages/settings/Settings';
 import Login from './components/pages/login/Login';
 import Register from './components/pages/login/register/Register';
 import { Routes , Route } from 'react-router-dom';
+import { useStateValue } from './stateProvide';
+import { useEffect } from 'react';
+import { auth } from './firebase';
 
 function App() {
+  
   return (
     <>
       <div className="App">

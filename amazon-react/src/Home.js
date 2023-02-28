@@ -28,7 +28,7 @@ function Home() {
         <div className='home_row'>
           <Product
             id="234425"
-            title="김인수의 전용 애마"
+            title=""
             price={100}
             image="https://www.autodaily.co.kr/news/photo/201704/335790_17345_2048.jpg"
             rating={4}
