@@ -12,6 +12,7 @@ import { auth } from './firebase';
 
 function App() {
   
+
   return (
     <>
       <div className="App">
