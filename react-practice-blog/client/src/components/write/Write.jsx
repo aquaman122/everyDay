@@ -1,8 +1,10 @@
 import React from 'react';
 import './Write.css';
 import AddIcon from '@mui/icons-material/Add';
+import Post from '../post/Post';
 
-function Write() {
+function Write({title, content, onChange, onSubmit}) {
+
   return (
     <>
       <div className='write'>
@@ -16,14 +18,21 @@ function Write() {
               <AddIcon className='writeIcon'/>
             </label>
             <input type="file" id='fileInput' style={{display:'none'}}/>
-            <input type="text" placeholder='Title' className='writeInput' autoFocus={true}/>
+            <input name='title' 
+            type="text" 
+            placeholder='Title' 
+            className='writeInput'
+            onChange={onChange}
+            autoFocus={true}/>
           </div>
           <div className="writeFormGroup">
             <textarea 
+            name='content'
             placeholder='Tell your story...' 
-            type='text' 
+            type='text'
+            onChange={onChange}
             className='writeInput writeText'></textarea>
-          <button className='writeSubmit'>Publish</button>
+          <button onSubmit={onSubmit} className='writeSubmit'>Publish</button>
           </div>
         </form>
       </div>
