@@ -1,7 +1,7 @@
 import React from 'react';
 import './Post.css';
 
-function Post({img}) {
+function Post({img, subTitle, subTitle2, title, time, content}) {
   return (
     <>
       <div className='post'>
@@ -12,20 +12,21 @@ function Post({img}) {
          />
         <div className="postInfo">
           <div className="postCats">
-            <span className="postCat">Music</span>
-            <span className="postCat">Life</span>
+            <span className="postCat">{subTitle}</span>
+            <span className="postCat">{subTitle2}</span>
           </div>
           <span className="postTitle">
-            Lorem ipsum dolor sit amet
+            {title}{/* Lorem ipsum dolor sit amet */}
           </span>
           <hr />
-          <span className='postData'>1 hour ago</span>
+          <span className='postData'>{time}</span>
         </div>
         <p className='postDesc'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
+          {content}
+          {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
           officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
           fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-          atque, exercitationem quibusdam, reiciendis odio laboriosam?
+          atque, exercitationem quibusdam, reiciendis odio laboriosam? */}
         </p>
       </div>
     </>

@@ -27,17 +27,21 @@ function TopBar() {
               <Link className='topListLink' to='/write'>
                 <li className='topListItem'>WRITE</li>
               </Link>
+            </ul>
+          </div>
+          <div className='topRight'>
+            <ul className='topList'>
               <Link className='topListLink' to='/'>
                 <li className='topListItem'>
                   LOGIN
                   </li>
               </Link>
+              <Link className='topListLink' to='/register'>
+                <li className='topListItem'>
+                  REGISTER
+                </li>
+              </Link>
             </ul>
-          </div>
-          <div className='topRight'>
-            <img className='topImg'
-            src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" 
-            alt="" />
             <SearchIcon className='topSeachIcon'/>
           </div>
       </div>
