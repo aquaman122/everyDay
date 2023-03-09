@@ -27,7 +27,9 @@ function Home() {
         </div>
         <div className='home_row_nav'>
           <div className='home_nav'>
-            <Script />
+            <Script
+              
+             />
           </div>
           <div className='home_nav'>
             <Script />
