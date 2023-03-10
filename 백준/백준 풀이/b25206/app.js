@@ -11,33 +11,36 @@ function solution(input) {
     let rankscore = 0;
     let pCount = 0;
     let aScore = 0;
+    let sAvg = 0;
     for (let i =0; i < input.length; i++) {
         score += Number(input[i][1]);
         rank.push(input[i][2]);
 
         switch (rank[i]) {
-            case 'A+': rankscore += 4.5;
+            case 'A+': rankscore = 4.5;
             break;
-            case 'A0': rankscore += 4.0;
+            case 'A0': rankscore = 4.0;
             break;
-            case 'B+': rankscore += 3.5;
+            case 'B+': rankscore = 3.5;
             break;
-            case 'B0': rankscore += 3.0;
+            case 'B0': rankscore = 3.0;
             break;
-            case 'C+': rankscore += 2.5;
+            case 'C+': rankscore = 2.5;
             break;
-            case 'C0': rankscore += 2.0;
+            case 'C0': rankscore = 2.0;
             break;
-            case 'D+': rankscore += 1.5;
+            case 'D+': rankscore = 1.5;
             break;
-            case 'D0': rankscore += 1.0;
+            case 'D0': rankscore = 1.0;
             break;
-            case 'F': rankscore += 0.0, score -= Number(input[i][1]);
+            case 'F': rankscore = 0.0;
             break;
             case 'P': pCount++;
             break;
             default:
             break;
         }
+        sAvg += Number(input[i][1]) + rankscore;
     }
+    console.log(sAvg);
 }
