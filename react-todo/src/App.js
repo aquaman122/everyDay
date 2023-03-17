@@ -1,45 +1,26 @@
 import './App.css';
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Button from './component/Button';
+import { createGlobalStyle } from 'styled-components';
+import TodoTemplate from './component/todoTemplate/TodoTemplate';
+import TodoHead from './component/todoHead/TodoHead';
+import TodoList from './component/todoList/TodoList';
+import TodoCreate from './component/todoCreate/TodoCreate';
 
-// const Circle = styled.div`
-//   width: 5rem;
-//   height: 5rem;
-//   background: ${props => props.color || 'black'};
-//   border-radius: 50%;
-//   ${props =>
-//     props.huge &&
-//     css`
-//       width: 10rem;
-//       height: 10rem;
-//     `}
-// `;
-
-const AppBlock = styled.div`
-  width: 512px;
-  margin: 0 auto;
-  margin-top: 4rem;
-  border: 1px solid black;
-  padding: 1rem;
-`;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: #e9ecef;
+  }
+`
 
 function App() {
   return (
     <>
-    <ThemeProvider
-      theme={{
-        palette: {
-          blue: '#228be6',
-          gray: '#495057',
-          pink: '#f06595'
-        }
-      }}
-    >
-      <AppBlock>
-        <Button>BUTTON</Button>
-      </AppBlock>
-    </ThemeProvider>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoHead />
+        <TodoList />
+        <TodoCreate />
+      </TodoTemplate>
     </>
   );
 }
