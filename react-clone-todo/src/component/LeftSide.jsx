@@ -42,6 +42,10 @@ const SearchBtn = styled.button`
   border: 1px solid rgba(0,0 ,0 , 0.1);
 `;
 
+const LastYear = styled.div`
+  display: flex;
+`
+
 function LeftSide({ id }) {
   return(
     <>
@@ -55,6 +59,8 @@ function LeftSide({ id }) {
             </Search>
             <SearchBtn><CiMedicalCross /></SearchBtn>
           </SearchForm>
+
+
         </Container>
       </Left>
     </>
