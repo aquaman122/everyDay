@@ -18,7 +18,6 @@ function solution(n) {
 
     while(a % b !== 0) {
       let r = a % b;
-      console.log(r);
 
       if (r !== 0) {
         a = b;
