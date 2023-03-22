@@ -42,8 +42,17 @@ const SearchBtn = styled.button`
   border: 1px solid rgba(0,0 ,0 , 0.1);
 `;
 
-const LastYear = styled.div`
+const ListTodo = styled.div`
   display: flex;
+`
+
+const ListUl = styled.ul`
+  font-size: 24px;
+  margin-top: 30px;
+`
+
+const ListLi = styled.li`
+  margin-top: 10px; 
 `
 
 function LeftSide({ id }) {
@@ -59,8 +68,13 @@ function LeftSide({ id }) {
             </Search>
             <SearchBtn><CiMedicalCross /></SearchBtn>
           </SearchForm>
-
-
+          <ListTodo>
+            <ListUl>
+              <ListLi>213121</ListLi>
+              <ListLi>13455413</ListLi>
+              <ListLi>4351154</ListLi>
+            </ListUl>
+          </ListTodo>
         </Container>
       </Left>
     </>
