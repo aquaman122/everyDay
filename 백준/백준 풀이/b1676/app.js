@@ -1,18 +1,32 @@
 const fs = require('fs');
 const { type } = require('os');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().trim().split('\n');
+let input = Number(fs.readFileSync(filePath).toString().trim());
 
-const n = +input;
-
-solution(n);
-
-function solution(n) {
-  let ans = 1;
-  for (let i = n; i > 1; i--) {
-    ans *= i;
+function factorial(n) {
+  if(n === 0 || n === 1) {
+    return 1n;
   }
-  let count = 0;
-  ans.toString().split('').filter(v => v == 0 ? count+=1 : false);
-  console.log(count);
+
+  return BigInt(n) * factorial(n - 1);
 }
+
+let result = factorial(input);
+
+let resultArr = String(result).split('');
+
+let count = 0;
+
+while(true) {
+  let popedNum = resultArr.pop();
+
+  if (popedNum === '0') {
+    count++;
+
+    continue;
+  }
+
+  break;
+}
+
+console.log(count);
