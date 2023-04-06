@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import 'reset.css';
+    * {
+      margin: 0; padding: 0;
+    }
+    body {
+      background-color: bisque;
+    }
+    header {
+      display: flex;
+      margin: 10px 0 30px 0;
+    }
+    .headerEmpty {
+      flex: 8;
+    }
+    .headerContainer {
+      flex: 2;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      color: white;
+    }
+    .headerUser {
+      color: white;
+      border: 10px solid black;
+      border-radius: 70%;
+      background-color: black;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .google {
+      display: flex;
+      font-size: 65px;
+      margin: 80px 0 50px 0;
+      color: white;
+    }
+
+    .inputWrapper {
+      display: flex;
+      align-items: center;
+      width: 561px;
+      height: 44px;
+      background-color: white;
+      border-radius: 20px;
+    }
+    .inputIcon {
+      margin-left: 10px;
+    }
+
+    .inputIcon > input {
+      margin-left: 10px;
+      border: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="headerEmpty"></div>
+    <div class="headerContainer">
+      <div class="headerGmail">Gmail</div>
+      <div class="headerImg">이미지</div>
+      <div class="headerBoxes">img</div>
+      <div class="headerUser">석원</div>
+    </div>
+  </header>
+  <main>
+    <div class="google">Google</div>
+    <div class="inputWrapper">
+      <div class="inputIcon">search
+        <input type="search" autocomplete="off" spellcheck="false" role="combobox" aria-controls="matches" placeholder="Google 검색 또는 URL 입력">
+      </div>
+    </div>
+    <div class="icons">
+      <a class="tile" href="https://youtube.com/">
+        <button></button>
+        <div class="icon">
+
+        </div>
+        <div class="iconsTitle">YouTube</div>
+      </a>
+      <a class="tile" href="https://youtube.com/">
+        <button></button>
+        <div class="icon">
+
+        </div>
+        <div class="iconsTitle">YouTube</div>
+      </a>
+      <a class="tile" href="https://youtube.com/">
+        <button></button>
+        <div class="icon">
+
+        </div>
+        <div class="iconsTitle">YouTube</div>
+      </a>
+      <a class="tile" href="https://youtube.com/">
+        <button></button>
+        <div class="icon">
+
+        </div>
+        <div class="iconsTitle">YouTube</div>
+      </a>
+      <a class="tile" href="https://youtube.com/">
+        <button></button>
+        <div class="icon">
+
+        </div>
+        <div class="iconsTitle">YouTube</div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
