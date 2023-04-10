@@ -9,7 +9,7 @@ const Auth = () => {
     password: ''
   });
   const { email, password } = inputs;
-  const [newAccount, setNewAccount] = useState(false);
+  const [newAccount, setNewAccount] = useState(true);
   const onChagne = e => {
     const {target: {name, value}} = e;
     setInputs({

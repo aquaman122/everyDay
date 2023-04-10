@@ -8,18 +8,15 @@ const T = +input.shift();
 solution(T);
 
 function solution(T) {
-  for (let i = 0; i < T; i++) {
-    const xyr = input[i].split(' ').map(v => +v);
-    let [x1, y1, r1, x2, y2, r2] = xyr;
-    
+  for (let i = 0 ; i< T; i++) {
+    let [x1, y1, r1, x2, y2, r2] = input[i].split(' ').map(v => +v);
     const dx = x1 - x2;
     const dy = y1 - y2;
-    if (r1 > r2) {
+    if (r1 > r2)  {
       const temp = r1;
       r1 = r2;
       r2 = temp;
     }
-
     const rSum = (r1 + r2) * (r1 + r2);
     const rSub = (r2 - r1) * (r2 - r1);
     const d = dx * dx + dy * dy;
