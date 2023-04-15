@@ -1,25 +1,29 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let input = fs.readFileSync(filePath).toString().split('\n').map(v => +v);
 
-const test  = input.shift();
-const result = [];
+let n = input.shift();
 
-solution(test, result)
+solution(n)
 
-function solution(test, result) {
+function solution(n) {
     // write here
-    
-    for (let i = 0; i < test; i++) {
-        let cnt = 0;
-
-        for (let s of input[i]) {
-            cnt += s === '(' ? 1 : -1 ;
-
-            if (cnt < 0) break;
-        }
-
-        result.push(cnt === 0 ? 'YES' : 'NO');
+  let ans = [];
+  let stack = [];
+  let stackNum = 1;
+  for (let i = 0; i < n; i++) {
+    let num = input[i];
+    while(stackNum <= num) {
+        stack.push(stackNum);
+        ans.push('+');
+        stackNum++;
     }
-    console.log(result.join('\n'));
+    let stackPop = stack.pop();
+    ans.push('-');
+    if (stackPop !== num) {
+      ans = ['NO'];
+      break;
+    }
+  }
+  console.log(ans.join('\n'));
 }

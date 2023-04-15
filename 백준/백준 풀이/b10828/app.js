@@ -2,33 +2,33 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
-const test = input.shift();
+const n = input.shift();
 
-solution(test)
+solution(n)
 
-function solution(test) {
+function solution(n) {
     // write here
     // 빈 배열
-    const array = [];
     const answer = [];
-    for (let i =0; i < test; i++) {
-        switch(input[i]) {
-            case 'pop':
-              array.length === 0 ? answer.push(-1) : answer.push(array.pop());
-              break;
-            case 'size':
-              answer.push(array.length);
-              break;
-            case 'empty':
-              array.length === 0 ? answer.push(1) : answer.push(0);
-              break;
-            case 'top':
-              array.length === 0 ? answer.push(-1) : answer.push(array[array.length - 1]);
-              break;
-            default:
-              array.push(input[i].split(' ')[1]);
-              break;
-        }
+    const arr = [];
+    for (let i =0; i < n; i++) {
+      switch (input[i]) {
+        case 'pop':
+          answer.push(arr.length === 0 ? -1 : arr.pop());
+          break;
+        case 'size':
+          answer.push(arr.length);
+          break;
+        case 'empty':
+          answer.push(arr.length === 0 ? 1 : 0);
+          break;
+        case 'top':
+          answer.push(arr.length === 0 ? -1 : arr[arr.length - 1]);
+          break;
+        default :
+          arr.push(input[i].split(' ')[1]);
+          break;
+      }
     }
     console.log(answer.join('\n'));
 }

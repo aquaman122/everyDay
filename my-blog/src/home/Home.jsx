@@ -1,8 +1,7 @@
 import React from 'react';
 import './Home.css';
-import Script from '../script/Script';
+import Posts from '../post/Posts'
 import SearchIcon from '@mui/icons-material/Search';
-
 function Home() {
   return (
     <>
@@ -25,30 +24,7 @@ function Home() {
               </select>
           </div>
         </div>
-        <div className='home_row_nav'>
-          <div className='home_nav'>
-            <Script
-              
-             />
-          </div>
-          <div className='home_nav'>
-            <Script />
-          </div>
-          <div className='home_nav'>
-            <Script />
-          </div>
-        </div>
-        <div className='home_row_nav'>
-          <div className='home_nav'>
-            <Script />
-          </div>
-          <div className='home_nav'>
-            <Script />
-          </div>
-          <div className='home_nav'>
-            <Script />
-          </div>
-        </div>
+        <Posts />
       </div>
     </>
   )
