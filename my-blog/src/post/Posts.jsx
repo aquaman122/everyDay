@@ -9,13 +9,13 @@ function Posts() {
           <div className='home_nav'>
             <Post
             title='javascript'
-            content='rkskek'
+            content=''
             />
           </div>
           <div className='home_nav'>
             <Post 
-            title='가자고'
-            content='you know?'
+            title=''
+            content='?'
             />
           </div>
           <div className='home_nav'>
