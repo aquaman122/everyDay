@@ -6,5 +6,5 @@ let input = fs.readFileSync(filePath).toString().trim().split(' ');
 solution();
 
 function solution() {
-  console.log(Number(input[0]) + Number(input[1]));
+  console.log(`${+input[0]} + ${+input[1]}`);
 }
