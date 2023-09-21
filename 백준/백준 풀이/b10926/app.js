@@ -3,8 +3,8 @@ const { type } = require('os');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().trim();
 
-solution();
+solution(input);
 
-function solution() {
-  
+function solution(input) {
+  console.log(`${input}??!`);
 }

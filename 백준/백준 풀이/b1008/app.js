@@ -1,10 +1,10 @@
 const fs = require('fs');
 const { type } = require('os');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().trim();
+let [a, b] = fs.readFileSync(filePath).toString().trim().split(' ');
 
-solution();
+solution(a, b);
 
-function solution() {
-  
+function solution(a, b) {
+  console.log(a / b);
 }

@@ -3,8 +3,10 @@ const { type } = require('os');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().trim();
 
-solution();
+let n = +input;
 
-function solution() {
-  
+solution(n);
+
+function solution(n) {
+  console.log(n - 543);
 }

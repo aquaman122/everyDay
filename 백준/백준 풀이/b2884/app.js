@@ -1,27 +1,19 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let [h, m] = fs.readFileSync(filePath).toString().split(' ').map(v => +v);
 
-input = input[0];
-input = input.split(' ').map((item) => +item);
+solution(h, m);
 
-solution(input[0], input[1]);
-
-function solution(A, B) {
+function solution(h, m) {
     // write here
-    
-    let H = A;
-    let M = B;
+    m -= 45;
+    if (m < 0) {
+        m += 60;
+        h -= 1;
 
-    M -= 45;
-    if (M < 0) {
-        H -= 1;
-        M += 60;
-
-        if (H < 0) {
-            H += 24;
+        if (h < 0) {
+            h = 23;
         }
     }
-
-    console.log(`${H} ${M}`);
+    console.log(`${h} ${m}`)
 }

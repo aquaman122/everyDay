@@ -1,30 +1,17 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let [a, b, c] = fs.readFileSync(filePath).toString().split(' ').map(v => +v);
 
-input = input[0];
-input = input.split(' ').map((item) => +item);
+solution(a, b, c);
 
-solution(input[0], input[1], input[2]);
-
-function solution(A, B, C) {
+function solution(a, b, c) {
     // write here
-
-let money = 0;
-let maxNum = 0;
-
-    if (A === B && A === C) {
-        money = (10000 + A * 1000);
-    } else if (A === B || A === C || B === C) {
-        if (A === B || A === C) {
-            money = (1000 + A*100);
-        } else {
-            money = (1000 + B*100);
-        }
+    let nums = [a, b, c];
+    if (a === b && a === c) {
+        console.log(10000 + a * 1000);
+    } else if ( a === b || b === c || a === c ) {
+        a === b || a === c ? console.log(1000 + a*100) : console.log(1000 + b*100);
     } else {
-        maxNum = Math.max(...input);
-        money = maxNum*100;
+        console.log(Math.max(...nums) * 100);
     }
-
-    console.log(money);
 }

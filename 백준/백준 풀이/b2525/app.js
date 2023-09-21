@@ -2,32 +2,20 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
-
+let [h, m] = input[0].split(' ').map(v => +v);
 let time = +input[1];
-input = input[0];
-input = input.split(' ').map((item) => +item);
 
+solution(h, m, time);
 
-
-solution(input[0], input[1], time);
-
-function solution(A, B, C) {
+function solution(h, m, time) {
     // write here
-    
-    let H = A;
-    let M = B;
-    let cookTime = C;
-
-    M += cookTime;
-
-    if ( M >= 60 ) {
-        H += Math.floor(M /60);
-        M %= 60;
-
-        if ( H > 23) {
-            H -= 24;
-        }
+    m += time;
+    if (m >= 60) {
+        h += Math.floor(m / 60);
+        m %= 60;
     }
-
-    console.log(`${H} ${M}`);
+    if (h >= 24) {
+        h -= 24;
+    }
+    console.log(`${h} ${m}`);
 }
