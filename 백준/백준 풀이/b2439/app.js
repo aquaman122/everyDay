@@ -3,23 +3,16 @@ const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
 
-solution(+input[0]);
+solution();
 
-function solution(N) {
+function solution() {
     // write here
-    
-    for (let line = 1; line <= N; line++) {
-        const starCnt = line;
-        const spaceCnt = N - line;
+  for (let i =0; i < +input; i++) {
+    let result = '';
 
-        let printString = '';
-        for (let i = 0; i < spaceCnt; i++) {
-            printString += ' ';
-        }
-
-        for (let i = 0; i < starCnt; i++) {
-            printString += '*';
-        }
-    console.log(printString);
+    for (let j = +input - 1; j >= 0; j--) {
+        result += j <= i ? '*' : ' ';
     }
+    console.log(result);
+  }
 }

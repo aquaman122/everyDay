@@ -2,27 +2,17 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
+let x = +input.shift();
+let n = +input.shift();
 
-T = +input[1];
+solution(x, n)
 
-
-solution(+input[0], T)
-
-function solution(result, T) {
+function solution(x, n) {
     // write here
-
-    let sum = 0;
-    for(let i = 2; i <= T + 1; i++) {
-       let num = input[i].split(' ').map((item) => +item);
-       let a = num[0];
-       let b = num[1];
-
-        sum += a * b;
+    let result = 0;
+    for (let i =0; i < n; i++) {
+        const [price, num] = input[i].split(' ').map(v => +v);
+        result += price * num;
     }
-    
-    if (sum === result) {
-        console.log("Yes");
-    } else {
-        console.log("No");
-    }
+    result === x ? console.log('Yes') : console.log('No');
 }

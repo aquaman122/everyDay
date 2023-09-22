@@ -1,27 +1,16 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let input = fs.readFileSync(filePath).toString();
 
 
-solution(+input[0])
+solution()
 
-function solution(N) {
+function solution() {
     // write here
-    
-    for (let line = 1; line <= N; line++) {
-        let starCnt = line;
-        let spaceCnt = N - line;
-        let printString = '';
-
-        for (let i = 0; i < starCnt; i++) {
-            printString += '*';
-        }
-
-        for (let i = 0; i < spaceCnt; i++) {
-            printString += ' ';
-        }
-        console.log(printString);
-    }
-
-
+  let result = '';
+  for (let i = 1; i <= +input; i++) {
+    let star= '*'
+    result += star;
+    console.log(result);
+  }
 }
