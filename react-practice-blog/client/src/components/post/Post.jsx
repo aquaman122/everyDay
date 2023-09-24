@@ -1,28 +1,28 @@
 import React from 'react';
 import './Post.css';
 
-function Post({img, subTitle, subTitle2, title, time, content}) {
+function Post(props) {
   return (
     <>
       <div className='post'>
         <img
         className='postImg'
-        src={img}
+        src={props.items.img}
         alt=''
          />
         <div className="postInfo">
           <div className="postCats">
-            <span className="postCat">{subTitle}</span>
-            <span className="postCat">{subTitle2}</span>
+            <span className="postCat">{props.items.subTitle}</span>
+            <span className="postCat">{props.items.subTitle2}</span>
           </div>
           <span className="postTitle">
-            {title}{/* Lorem ipsum dolor sit amet */}
+            {props.items.title}{/* Lorem ipsum dolor sit amet */}
           </span>
           <hr />
-          <span className='postData'>{time}</span>
+          <span className='postData'>{props.items.time}</span>
         </div>
         <p className='postDesc'>
-          {content}
+          {props.items.content}
           {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
           officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
           fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
