@@ -1,19 +1,15 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-const arr = input[1].split(' ');
-const v = input[2];
+const n = input.shift();
+const nums = input.shift().split(' ').map(v => +v);
+const v = +input;
 
-solution(arr, v)
+solution(n, nums, v)
 
-function solution(arr, v) {
+function solution(n, nums, v) {
   // write here
-  let count = 0;
-  arr.filter((item, idx) => {
-    if (item === v) {
-      count++;
-    }
-  });
-  console.log(count);
+  let answer = nums.filter(item => item === v).length;
+  console.log(answer);
 }
