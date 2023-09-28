@@ -22,4 +22,5 @@ function solution() {
   y = arrY[1] === arrY[0] ? arrY[2] : arrY[0];
 
   console.log(x, y);
+
 }

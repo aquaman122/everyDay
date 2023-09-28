@@ -7,6 +7,5 @@ solution()
 
 function solution() {
     // write here
-  console.log(new Set(input.map(item => item % 42)).size);
-  
+  console.log(new Set(input.map(item => item % 42)).size); 
 }
